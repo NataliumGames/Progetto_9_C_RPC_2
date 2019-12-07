@@ -28,7 +28,7 @@ struct Input {
     char operazione;
 };
 
-program FATTOREX {
+program FATTOREXPROG {
     version FATTOREXVERS {
         Output CLASSIFICA_GIUDICI(void) = 1;
         Candidati ESPRIMI_VOTO(Input) = 2;

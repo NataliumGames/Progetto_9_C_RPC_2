@@ -66,7 +66,7 @@ closedown()
 }
 
 static void
-fattorex_1(rqstp, transp)
+fattorexprog_1(rqstp, transp)
 	struct svc_req *rqstp;
 	SVCXPRT *transp;
 {
@@ -170,7 +170,7 @@ char *argv[];
 		openlog("fattoreX", LOG_PID, LOG_DAEMON);
 #endif
 		sock = RPC_ANYSOCK;
-		(void) pmap_unset(FATTOREX, FATTOREXVERS);
+		(void) pmap_unset(FATTOREXPROG, FATTOREXVERS);
 	}
 
 	if ((_rpcfdtype == 0) || (_rpcfdtype == SOCK_DGRAM)) {
@@ -181,8 +181,8 @@ char *argv[];
 		}
 		if (!_rpcpmstart)
 			proto = IPPROTO_UDP;
-		if (!svc_register(transp, FATTOREX, FATTOREXVERS, fattorex_1, proto)) {
-			_msgout("unable to register (FATTOREX, FATTOREXVERS, udp).");
+		if (!svc_register(transp, FATTOREXPROG, FATTOREXVERS, fattorexprog_1, proto)) {
+			_msgout("unable to register (FATTOREXPROG, FATTOREXVERS, udp).");
 			exit(1);
 		}
 	}
@@ -198,8 +198,8 @@ char *argv[];
 		}
 		if (!_rpcpmstart)
 			proto = IPPROTO_TCP;
-		if (!svc_register(transp, FATTOREX, FATTOREXVERS, fattorex_1, proto)) {
-			_msgout("unable to register (FATTOREX, FATTOREXVERS, tcp).");
+		if (!svc_register(transp, FATTOREXPROG, FATTOREXVERS, fattorexprog_1, proto)) {
+			_msgout("unable to register (FATTOREXPROG, FATTOREXVERS, tcp).");
 			exit(1);
 		}
 	}

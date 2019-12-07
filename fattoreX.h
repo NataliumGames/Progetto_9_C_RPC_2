@@ -85,7 +85,7 @@ bool_t xdr_Input();
 #endif /* Old Style C */
 
 
-#define FATTOREX ((rpc_uint)0x20000013)
+#define FATTOREXPROG ((rpc_uint)0x20000013)
 #define FATTOREXVERS ((rpc_uint)1)
 
 #ifdef __cplusplus
