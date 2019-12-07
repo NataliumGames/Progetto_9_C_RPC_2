@@ -11,7 +11,7 @@ struct Candidato {
 };
 
 struct Candidati {
-    Candidato candidato[MAX];
+    Candidato candidato[MAXCANDIDATI];
 };
 
 struct Giudice {

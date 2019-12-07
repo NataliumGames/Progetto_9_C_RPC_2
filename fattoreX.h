@@ -32,7 +32,7 @@ bool_t xdr_Candidato();
 
 
 struct Candidati {
-	Candidato candidato[MAX];
+	Candidato candidato[MAXCANDIDATI];
 };
 typedef struct Candidati Candidati;
 #ifdef __cplusplus

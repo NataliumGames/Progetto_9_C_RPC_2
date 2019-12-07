@@ -32,7 +32,7 @@ xdr_Candidati(xdrs, objp)
 	Candidati *objp;
 {
 
-	if (!xdr_vector(xdrs, (char *)objp->candidato, MAX, sizeof(Candidato), (xdrproc_t)xdr_Candidato))
+	if (!xdr_vector(xdrs, (char *)objp->candidato, MAXCANDIDATI, sizeof(Candidato), (xdrproc_t)xdr_Candidato))
 		return (FALSE);
 	return (TRUE);
 }
