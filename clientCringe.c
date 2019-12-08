@@ -10,6 +10,7 @@ int main(int argc, char const *argv[]) {
     char *server;
     int servizio;
     int operazione;
+    int result;
 
     void *in;
 
@@ -88,14 +89,11 @@ int main(int argc, char const *argv[]) {
                 strcpy(in->candidato, nomeCandidato);
                 strcpy(in->operazione, "sottrazione");
 
-                res = esprimi_voto_1(in, client);
-
-                if(res == NULL) {
-                    clnt_perror(client, server);
-                    printf("Errore nel file scan method...\n");
-                } else if(&res == NULL) {
-                    clnt_perror(client, server);
-                    printf("errore\n");
+                result = esprimi_voto_1(in, client);
+                if(result == 0) {
+                    printf("Operazione effettuata con successo\n");
+                } else {
+                    printf("Errore nella votazione\n");
                 }
             }
         } else if(servizio == 3) {
