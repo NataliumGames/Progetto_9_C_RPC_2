@@ -73,7 +73,7 @@ bool_t xdr_Output();
 
 struct Input {
 	char candidato[32];
-	char operazione;
+	char operazione[16];
 };
 typedef struct Input Input;
 #ifdef __cplusplus

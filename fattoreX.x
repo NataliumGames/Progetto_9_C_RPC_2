@@ -25,7 +25,7 @@ struct Output {
 
 struct Input {
     char candidato[32];
-    char operazione;
+    char operazione[16];
 };
 
 program FATTOREXPROG {

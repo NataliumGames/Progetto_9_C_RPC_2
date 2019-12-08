@@ -9,10 +9,14 @@ int main(int argc, char const *argv[]) {
     CLIENT *client;
     char *server;
     int servizio;
+    int operazione;
 
     void *in;
 
+    char *nomeCandidato;
+
     static struct Output *out;
+    static struct Candidati *res;
 
     if(argc != 2) {
         printf("Numero argomenti non valido..\n");
@@ -55,7 +59,25 @@ int main(int argc, char const *argv[]) {
             }
 
         } else if(servizio == 2) {
+            printf("Servizio di votazione\n\n");
+            printf("Chi vuoi votare?\n");
 
+            gets(nomeCandidato);
+            printf("Votazione di %s\n\t1 - aggiungi voto\n\t2 - sottrai voto\n\n");
+
+            char str[20];
+            fgets(str, 20, stdin);
+            operazione = strtol(str, NULL, 0);
+
+            if(operazione == 1) {
+                Input *in;
+                strcpy(in->candidato, nomeCandidato);
+                in->operazione = 's';
+
+                res = esprimi_voto_1(in, client);
+            } else if(operazione = 2) {
+
+            }
         } else if(servizio == 3) {
              printf("Termino...\n");
              break;

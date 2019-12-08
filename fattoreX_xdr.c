@@ -69,7 +69,7 @@ xdr_Input(xdrs, objp)
 
 	if (!xdr_vector(xdrs, (char *)objp->candidato, 32, sizeof(char), (xdrproc_t)xdr_char))
 		return (FALSE);
-	if (!xdr_char(xdrs, &objp->operazione))
+	if (!xdr_vector(xdrs, (char *)objp->operazione, 16, sizeof(char), (xdrproc_t)xdr_char))
 		return (FALSE);
 	return (TRUE);
 }
