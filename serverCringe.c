@@ -123,7 +123,7 @@ Output * classifica_giudici_1_svc(void *in, struct svc_req *rp) {
     return &out;
 }
 
-Candidati * esprimi_voto_1_svc(Input *in, struct svc_req *rp) {
+int * esprimi_voto_1_svc(Input *in, struct svc_req *rp) {
     inizializza();
 
     char *nome;
@@ -142,11 +142,13 @@ Candidati * esprimi_voto_1_svc(Input *in, struct svc_req *rp) {
                 candidati.candidato[i].voto++;
             } else if(strcmp(operazione, "sottrazione") == 0) {
                 candidati.candidato[i].voto--;
+            } else {
+                return -1;
             }
         }
         i++;
     }
 
-    return &candidati;
+    return 0;
 }
 
