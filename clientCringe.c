@@ -10,14 +10,13 @@ int main(int argc, char const *argv[]) {
     char *server;
     int servizio;
     int operazione;
-    int result;
+    int *result;
 
     void *in;
 
-    char *nomeCandidato;
+    char nomeCandidato[32];
 
-    static struct Output *out;
-    static struct Candidati *res;
+    Output *out;
 
     if(argc != 2) {
         printf("Numero argomenti non valido..\n");
@@ -54,8 +53,8 @@ int main(int argc, char const *argv[]) {
             }
 
             for(int i = 0; i < MAXGIUDICI; i++) {
-                if(!strcmp(&out->giudici[i], "L")) {
-                    printf("Giudice: %s\tPunteggio: %d\n", out->giudici[i].nomeGiudice, out->giudici[i].punteggio);
+                if(strcmp(&out->giudici[i], "L")) {
+                    printf("Giudice: %s\t\tPunteggio: %d\n", out->giudici[i].nomeGiudice, out->giudici[i].punteggio);
                 }
             }
 
@@ -63,7 +62,7 @@ int main(int argc, char const *argv[]) {
             printf("Servizio di votazione\n\n");
             printf("Chi vuoi votare?\n");
 
-            gets(nomeCandidato);
+            fgets(nomeCandidato, 32, stdin);
             printf("Votazione di %s\n\t1 - aggiungi voto\n\t2 - sottrai voto\n\n");
 
             char str[20];
@@ -71,29 +70,41 @@ int main(int argc, char const *argv[]) {
             operazione = strtol(str, NULL, 0);
 
             if(operazione == 1) {
-                Input *in;
-                strcpy(in->candidato, nomeCandidato);
-                strcpy(in->operazione, "aggiunta");
+                Input in;
 
-                res = esprimi_voto_1(in, client);
+                strcpy(in.candidato, nomeCandidato);
+                strcpy(in.operazione, "aggiunta");
+
+                printf("Mammaaaaaaa\n");
+
+                result = esprimi_voto_1(&in, client);
                 
-                if(res == NULL) {
+                printf("Ma\n");
+                
+                if(result == NULL) {
                     clnt_perror(client, server);
-                    printf("Errore nel file scan method...\n");
-                } else if(&res == NULL) {
+                    printf("errore RPC\n");
+                } else if(*result == 0) {
+                    printf("Gianni Morandi\n");
+                } else if(*result == -1) {
                     clnt_perror(client, server);
-                    printf("errore\n");
+                    printf("errore protocollo\n");
                 }
             } else if(operazione = 2) {
-                Input *in;
-                strcpy(in->candidato, nomeCandidato);
-                strcpy(in->operazione, "sottrazione");
+                Input in;
+                strcpy(in.candidato, nomeCandidato);
+                strcpy(in.operazione, "sottrazione");
 
-                result = esprimi_voto_1(in, client);
-                if(result == 0) {
-                    printf("Operazione effettuata con successo\n");
-                } else {
-                    printf("Errore nella votazione\n");
+                result = esprimi_voto_1(&in, client);
+                
+                if(result == NULL) {
+                    clnt_perror(client, server);
+                    printf("errore RPC\n");
+                } else if(*result == 0) {
+                    printf("Gianni Morandi\n");
+                } else if(*result == -1) {
+                    clnt_perror(client, server);
+                    printf("errore protocollo\n");
                 }
             }
         } else if(servizio == 3) {

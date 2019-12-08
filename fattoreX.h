@@ -6,9 +6,12 @@
 #ifndef _FATTOREX_H_RPCGEN
 #define _FATTOREX_H_RPCGEN
 
-#define RPCGEN_VERSION	199506
-
 #include <rpc/rpc.h>
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define MAXCANDIDATI 15
 #define MAXGIUDICI 5
@@ -22,95 +25,71 @@ struct Candidato {
 	int voto;
 };
 typedef struct Candidato Candidato;
-#ifdef __cplusplus
-extern "C" bool_t xdr_Candidato(XDR *, Candidato*);
-#elif __STDC__
-extern  bool_t xdr_Candidato(XDR *, Candidato*);
-#else /* Old Style C */
-bool_t xdr_Candidato();
-#endif /* Old Style C */
-
 
 struct Candidati {
 	Candidato candidato[MAXCANDIDATI];
 };
 typedef struct Candidati Candidati;
-#ifdef __cplusplus
-extern "C" bool_t xdr_Candidati(XDR *, Candidati*);
-#elif __STDC__
-extern  bool_t xdr_Candidati(XDR *, Candidati*);
-#else /* Old Style C */
-bool_t xdr_Candidati();
-#endif /* Old Style C */
-
 
 struct Giudice {
 	char nomeGiudice[32];
 	int punteggio;
 };
 typedef struct Giudice Giudice;
-#ifdef __cplusplus
-extern "C" bool_t xdr_Giudice(XDR *, Giudice*);
-#elif __STDC__
-extern  bool_t xdr_Giudice(XDR *, Giudice*);
-#else /* Old Style C */
-bool_t xdr_Giudice();
-#endif /* Old Style C */
-
 
 struct Output {
 	Giudice giudici[MAXGIUDICI];
 };
 typedef struct Output Output;
-#ifdef __cplusplus
-extern "C" bool_t xdr_Output(XDR *, Output*);
-#elif __STDC__
-extern  bool_t xdr_Output(XDR *, Output*);
-#else /* Old Style C */
-bool_t xdr_Output();
-#endif /* Old Style C */
-
 
 struct Input {
 	char candidato[32];
 	char operazione[16];
 };
 typedef struct Input Input;
-#ifdef __cplusplus
-extern "C" bool_t xdr_Input(XDR *, Input*);
-#elif __STDC__
-extern  bool_t xdr_Input(XDR *, Input*);
-#else /* Old Style C */
-bool_t xdr_Input();
-#endif /* Old Style C */
 
+#define FATTOREXPROG 0x20000013
+#define FATTOREXVERS 1
 
-#define FATTOREXPROG ((rpc_uint)0x20000013)
-#define FATTOREXVERS ((rpc_uint)1)
-
-#ifdef __cplusplus
-#define CLASSIFICA_GIUDICI ((rpc_uint)1)
-extern "C" Output * classifica_giudici_1(void *, CLIENT *);
-extern "C" Output * classifica_giudici_1_svc(void *, struct svc_req *);
-#define ESPRIMI_VOTO ((rpc_uint)2)
-extern "C" int * esprimi_voto_1(Input *, CLIENT *);
-extern "C" int * esprimi_voto_1_svc(Input *, struct svc_req *);
-
-#elif __STDC__
-#define CLASSIFICA_GIUDICI ((rpc_uint)1)
+#if defined(__STDC__) || defined(__cplusplus)
+#define CLASSIFICA_GIUDICI 1
 extern  Output * classifica_giudici_1(void *, CLIENT *);
 extern  Output * classifica_giudici_1_svc(void *, struct svc_req *);
-#define ESPRIMI_VOTO ((rpc_uint)2)
+#define ESPRIMI_VOTO 2
 extern  int * esprimi_voto_1(Input *, CLIENT *);
 extern  int * esprimi_voto_1_svc(Input *, struct svc_req *);
+extern int fattorexprog_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 
-#else /* Old Style C */
-#define CLASSIFICA_GIUDICI ((rpc_uint)1)
+#else /* K&R C */
+#define CLASSIFICA_GIUDICI 1
 extern  Output * classifica_giudici_1();
 extern  Output * classifica_giudici_1_svc();
-#define ESPRIMI_VOTO ((rpc_uint)2)
+#define ESPRIMI_VOTO 2
 extern  int * esprimi_voto_1();
 extern  int * esprimi_voto_1_svc();
-#endif /* Old Style C */
+extern int fattorexprog_1_freeresult ();
+#endif /* K&R C */
+
+/* the xdr functions */
+
+#if defined(__STDC__) || defined(__cplusplus)
+extern  bool_t xdr_Candidato (XDR *, Candidato*);
+extern  bool_t xdr_Candidati (XDR *, Candidati*);
+extern  bool_t xdr_Giudice (XDR *, Giudice*);
+extern  bool_t xdr_Output (XDR *, Output*);
+extern  bool_t xdr_Input (XDR *, Input*);
+
+#else /* K&R C */
+extern bool_t xdr_Candidato ();
+extern bool_t xdr_Candidati ();
+extern bool_t xdr_Giudice ();
+extern bool_t xdr_Output ();
+extern bool_t xdr_Input ();
+
+#endif /* K&R C */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* !_FATTOREX_H_RPCGEN */

@@ -6,70 +6,78 @@
 #include "fattoreX.h"
 
 bool_t
-xdr_Candidato(xdrs, objp)
-	XDR *xdrs;
-	Candidato *objp;
+xdr_Candidato (XDR *xdrs, Candidato *objp)
 {
+	register int32_t *buf;
 
-	if (!xdr_vector(xdrs, (char *)objp->candidato, 32, sizeof(char), (xdrproc_t)xdr_char))
-		return (FALSE);
-	if (!xdr_vector(xdrs, (char *)objp->giudice, 32, sizeof(char), (xdrproc_t)xdr_char))
-		return (FALSE);
-	if (!xdr_char(xdrs, &objp->categoria))
-		return (FALSE);
-	if (!xdr_vector(xdrs, (char *)objp->nomeFile, 32, sizeof(char), (xdrproc_t)xdr_char))
-		return (FALSE);
-	if (!xdr_char(xdrs, &objp->fase))
-		return (FALSE);
-	if (!xdr_int(xdrs, &objp->voto))
-		return (FALSE);
-	return (TRUE);
+	int i;
+	 if (!xdr_vector (xdrs, (char *)objp->candidato, 32,
+		sizeof (char), (xdrproc_t) xdr_char))
+		 return FALSE;
+	 if (!xdr_vector (xdrs, (char *)objp->giudice, 32,
+		sizeof (char), (xdrproc_t) xdr_char))
+		 return FALSE;
+	 if (!xdr_char (xdrs, &objp->categoria))
+		 return FALSE;
+	 if (!xdr_vector (xdrs, (char *)objp->nomeFile, 32,
+		sizeof (char), (xdrproc_t) xdr_char))
+		 return FALSE;
+	 if (!xdr_char (xdrs, &objp->fase))
+		 return FALSE;
+	 if (!xdr_int (xdrs, &objp->voto))
+		 return FALSE;
+	return TRUE;
 }
 
 bool_t
-xdr_Candidati(xdrs, objp)
-	XDR *xdrs;
-	Candidati *objp;
+xdr_Candidati (XDR *xdrs, Candidati *objp)
 {
+	register int32_t *buf;
 
-	if (!xdr_vector(xdrs, (char *)objp->candidato, MAXCANDIDATI, sizeof(Candidato), (xdrproc_t)xdr_Candidato))
-		return (FALSE);
-	return (TRUE);
+	int i;
+	 if (!xdr_vector (xdrs, (char *)objp->candidato, MAXCANDIDATI,
+		sizeof (Candidato), (xdrproc_t) xdr_Candidato))
+		 return FALSE;
+	return TRUE;
 }
 
 bool_t
-xdr_Giudice(xdrs, objp)
-	XDR *xdrs;
-	Giudice *objp;
+xdr_Giudice (XDR *xdrs, Giudice *objp)
 {
+	register int32_t *buf;
 
-	if (!xdr_vector(xdrs, (char *)objp->nomeGiudice, 32, sizeof(char), (xdrproc_t)xdr_char))
-		return (FALSE);
-	if (!xdr_int(xdrs, &objp->punteggio))
-		return (FALSE);
-	return (TRUE);
+	int i;
+	 if (!xdr_vector (xdrs, (char *)objp->nomeGiudice, 32,
+		sizeof (char), (xdrproc_t) xdr_char))
+		 return FALSE;
+	 if (!xdr_int (xdrs, &objp->punteggio))
+		 return FALSE;
+	return TRUE;
 }
 
 bool_t
-xdr_Output(xdrs, objp)
-	XDR *xdrs;
-	Output *objp;
+xdr_Output (XDR *xdrs, Output *objp)
 {
+	register int32_t *buf;
 
-	if (!xdr_vector(xdrs, (char *)objp->giudici, MAXGIUDICI, sizeof(Giudice), (xdrproc_t)xdr_Giudice))
-		return (FALSE);
-	return (TRUE);
+	int i;
+	 if (!xdr_vector (xdrs, (char *)objp->giudici, MAXGIUDICI,
+		sizeof (Giudice), (xdrproc_t) xdr_Giudice))
+		 return FALSE;
+	return TRUE;
 }
 
 bool_t
-xdr_Input(xdrs, objp)
-	XDR *xdrs;
-	Input *objp;
+xdr_Input (XDR *xdrs, Input *objp)
 {
+	register int32_t *buf;
 
-	if (!xdr_vector(xdrs, (char *)objp->candidato, 32, sizeof(char), (xdrproc_t)xdr_char))
-		return (FALSE);
-	if (!xdr_vector(xdrs, (char *)objp->operazione, 16, sizeof(char), (xdrproc_t)xdr_char))
-		return (FALSE);
-	return (TRUE);
+	int i;
+	 if (!xdr_vector (xdrs, (char *)objp->candidato, 32,
+		sizeof (char), (xdrproc_t) xdr_char))
+		 return FALSE;
+	 if (!xdr_vector (xdrs, (char *)objp->operazione, 16,
+		sizeof (char), (xdrproc_t) xdr_char))
+		 return FALSE;
+	return TRUE;
 }
