@@ -5,6 +5,7 @@
 #include <rpc/rpc.h>
 
 static Candidati candidati;
+static Output out;
 static int inizializzato = 0;
 
 void inizializza() {
@@ -117,13 +118,31 @@ void ordina(Output v, int dim) {
 Output * classifica_giudici_1_svc(void *in, struct svc_req *rp) {
     inizializza();
 
-    
+    ordina(out, MAXGIUDICI);
 }
 
 Candidati * esprimi_voto_1_svc(Input *in, struct svc_req *rp) {
+    inizializza();
+
     char *nome;
-    
+    char *operazione;
+    int i = 0;
+    int trovato = 0;
 
+    strcpy(nome, in->candidato);
+    strcpy(operazione, in->operazione);
 
+    while(!trovato) {
+        if(strcmp(candidati.candidato[i].candidato, nome) == 0) {
+            trovato = 1;
+
+            if(strcmp(operazione, "aggiunta") == 0) {
+                candidati.candidato[i].voto++;
+            } else if(strcmp(operazione, "sottrazione") == 0) {
+                candidati.candidato[i].voto--;
+            }
+        }
+        i++;
+    } 
 }
 
