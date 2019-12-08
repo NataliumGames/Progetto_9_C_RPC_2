@@ -72,11 +72,31 @@ int main(int argc, char const *argv[]) {
             if(operazione == 1) {
                 Input *in;
                 strcpy(in->candidato, nomeCandidato);
-                in->operazione = 's';
+                strcpy(in->operazione, "aggiunta");
 
                 res = esprimi_voto_1(in, client);
+                
+                if(res == NULL) {
+                    clnt_perror(client, server);
+                    printf("Errore nel file scan method...\n");
+                } else if(&res == NULL) {
+                    clnt_perror(client, server);
+                    printf("errore\n");
+                }
             } else if(operazione = 2) {
+                Input *in;
+                strcpy(in->candidato, nomeCandidato);
+                strcpy(in->operazione, "sottrazione");
 
+                res = esprimi_voto_1(in, client);
+
+                if(res == NULL) {
+                    clnt_perror(client, server);
+                    printf("Errore nel file scan method...\n");
+                } else if(&res == NULL) {
+                    clnt_perror(client, server);
+                    printf("errore\n");
+                }
             }
         } else if(servizio == 3) {
              printf("Termino...\n");
