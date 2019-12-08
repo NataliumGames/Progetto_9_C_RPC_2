@@ -139,18 +139,19 @@ Output * classifica_giudici_1_svc(void *in, struct svc_req *rp) {
 int * esprimi_voto_1_svc(Input *in, struct svc_req *rp) {
     inizializza();
 
-    char *nome;
-    char *operazione;
+    char nome[32];
+    char operazione[16];
     int i = 0;
     int trovato = 0;
     static int err = -1;
     static int ok = 0;
+    static int not = 1;
 
     strcpy(nome, in->candidato);
     strcpy(operazione, in->operazione);
 
-    while(!trovato) {
-        if(strcmp(candidati.candidato[i].candidato, nome) == 0) {
+    while(!trovato && i < MAXCANDIDATI) {
+        if((strcmp(candidati.candidato[i].candidato, nome)) == 0) {
             trovato = 1;
             int trovato2 = 0;
             int j = 0;
@@ -180,6 +181,8 @@ int * esprimi_voto_1_svc(Input *in, struct svc_req *rp) {
         i++;
     }
 
+    if(!trovato)
+        return(&not);
     return (&ok);
 }
 

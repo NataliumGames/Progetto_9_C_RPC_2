@@ -63,6 +63,7 @@ int main(int argc, char const *argv[]) {
             printf("Chi vuoi votare?\n");
 
             fgets(nomeCandidato, 32, stdin);
+            nomeCandidato[strcspn(nomeCandidato, "\n")] = 0;
             printf("Votazione di %s\n\t1 - aggiungi voto\n\t2 - sottrai voto\n\n");
 
             char str[20];
@@ -75,20 +76,19 @@ int main(int argc, char const *argv[]) {
                 strcpy(in.candidato, nomeCandidato);
                 strcpy(in.operazione, "aggiunta");
 
-                printf("Mammaaaaaaa\n");
-
                 result = esprimi_voto_1(&in, client);
-                
-                printf("Ma\n");
                 
                 if(result == NULL) {
                     clnt_perror(client, server);
                     printf("errore RPC\n");
                 } else if(*result == 0) {
-                    printf("Gianni Morandi\n");
+                    printf("Votazione avvenuta\n");
                 } else if(*result == -1) {
                     clnt_perror(client, server);
                     printf("errore protocollo\n");
+                } else if(*result == 1) {
+                    clnt_perror(client, server);
+                    printf("Candidato non trovato\n");
                 }
             } else if(operazione = 2) {
                 Input in;
@@ -101,10 +101,13 @@ int main(int argc, char const *argv[]) {
                     clnt_perror(client, server);
                     printf("errore RPC\n");
                 } else if(*result == 0) {
-                    printf("Gianni Morandi\n");
+                    printf("Votazione avvenuta\n");
                 } else if(*result == -1) {
                     clnt_perror(client, server);
                     printf("errore protocollo\n");
+                } else if(*result == 1) {
+                    clnt_perror(client, server);
+                    printf("Candidato non trovato\n");
                 }
             }
         } else if(servizio == 3) {
