@@ -93,24 +93,24 @@ bool_t xdr_Input();
 extern "C" Output * classifica_giudici_1(void *, CLIENT *);
 extern "C" Output * classifica_giudici_1_svc(void *, struct svc_req *);
 #define ESPRIMI_VOTO ((rpc_uint)2)
-extern "C" Candidati * esprimi_voto_1(Input *, CLIENT *);
-extern "C" Candidati * esprimi_voto_1_svc(Input *, struct svc_req *);
+extern "C" int * esprimi_voto_1(Input *, CLIENT *);
+extern "C" int * esprimi_voto_1_svc(Input *, struct svc_req *);
 
 #elif __STDC__
 #define CLASSIFICA_GIUDICI ((rpc_uint)1)
 extern  Output * classifica_giudici_1(void *, CLIENT *);
 extern  Output * classifica_giudici_1_svc(void *, struct svc_req *);
 #define ESPRIMI_VOTO ((rpc_uint)2)
-extern  Candidati * esprimi_voto_1(Input *, CLIENT *);
-extern  Candidati * esprimi_voto_1_svc(Input *, struct svc_req *);
+extern  int * esprimi_voto_1(Input *, CLIENT *);
+extern  int * esprimi_voto_1_svc(Input *, struct svc_req *);
 
 #else /* Old Style C */
 #define CLASSIFICA_GIUDICI ((rpc_uint)1)
 extern  Output * classifica_giudici_1();
 extern  Output * classifica_giudici_1_svc();
 #define ESPRIMI_VOTO ((rpc_uint)2)
-extern  Candidati * esprimi_voto_1();
-extern  Candidati * esprimi_voto_1_svc();
+extern  int * esprimi_voto_1();
+extern  int * esprimi_voto_1_svc();
 #endif /* Old Style C */
 
 #endif /* !_FATTOREX_H_RPCGEN */

@@ -21,15 +21,15 @@ classifica_giudici_1(argp, clnt)
 	return (&clnt_res);
 }
 
-Candidati *
+int *
 esprimi_voto_1(argp, clnt)
 	Input *argp;
 	CLIENT *clnt;
 {
-	static Candidati clnt_res;
+	static int clnt_res;
 
 	memset((char *)&clnt_res, 0, sizeof(clnt_res));
-	if (clnt_call(clnt, ESPRIMI_VOTO, xdr_Input, argp, xdr_Candidati, &clnt_res, TIMEOUT) != RPC_SUCCESS)
+	if (clnt_call(clnt, ESPRIMI_VOTO, xdr_Input, argp, xdr_int, &clnt_res, TIMEOUT) != RPC_SUCCESS)
 		return (NULL);
 	return (&clnt_res);
 }

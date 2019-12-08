@@ -92,7 +92,7 @@ fattorexprog_1(rqstp, transp)
 
 	case ESPRIMI_VOTO:
 		xdr_argument = xdr_Input;
-		xdr_result = xdr_Candidati;
+		xdr_result = xdr_int;
 		local = (char *(*)()) esprimi_voto_1_svc;
 		break;
 

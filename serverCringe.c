@@ -119,6 +119,8 @@ Output * classifica_giudici_1_svc(void *in, struct svc_req *rp) {
     inizializza();
 
     ordina(out, MAXGIUDICI);
+
+    return &out;
 }
 
 Candidati * esprimi_voto_1_svc(Input *in, struct svc_req *rp) {
@@ -143,6 +145,8 @@ Candidati * esprimi_voto_1_svc(Input *in, struct svc_req *rp) {
             }
         }
         i++;
-    } 
+    }
+
+    return &candidati;
 }
 
